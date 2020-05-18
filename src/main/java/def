@@ -1,0 +1,8 @@
+datatype : Container
+{
+obj : sourceContainer
+obj : DestinationContainer
+method : IsEmpty boolean
+method : CountofItems int
+method : Barcode String
+}
