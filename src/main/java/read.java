@@ -6,11 +6,13 @@ public  class read {
     List<String > datatypes = new ArrayList<>();
     List<String>  objects  = new ArrayList<>();
     List<String> methods  = new ArrayList<>();
-    HashMap<String,List<String>> methodmap = new HashMap<>();
-    HashMap<String,List<String>> objmap = new HashMap<>();
-    HashMap<String,String> methodreturn = new HashMap<>();
-    public  read() {
+    Map<String,List<String>> methodmap = new HashMap<>();
+
+    Map<String,List<String>> objmap = new HashMap<>();
+    Map<String,String> methodreturn = new HashMap<>();
+    public   read() {
         try {
+
             File file = new File("/Users/shriraamreddyb/IdeaProjects/datatype/src/main/java/def");
             Scanner fileread = new Scanner(file);
             String type = "";
@@ -22,21 +24,41 @@ public  class read {
                 String[] tokens = data.split("\\s+", -1);
 
                 if (tokens[0].equals("datatype")) {
+                    objects = new ArrayList<>();
+                    methods = new ArrayList<>();
                     this.datatypes.add(tokens[2]);
                     type = tokens[2];
                 }
                 if (tokens[0].equals("obj")) {
 //                    System.out.println(tokens[2]);
 //                    System.out.println(type);
-                    this.objects.add(tokens[2]);
+
+                    objects.add(tokens[2]);
                 }
                 if (tokens[0].equals("method")) {
-                    this.methods.add(tokens[2]);
+
+                    methods.add(tokens[2]);
                     this.methodreturn.put(tokens[2], tokens[3]);
                 }
+                if(tokens[0].equals("}")){
+                    if(!objects.isEmpty()){
+
+                        this.objmap.put(type, objects);
+
+                       // System.out.println(objmap);
+
+                    }
+
+                    if(!methods.isEmpty()){
+
+                        this.methodmap.put(type, methods);
+                       // System.out.println(methodmap);
+
+                    }
+                }
             }
-            this.objmap.put(type, objects);
-            this.methodmap.put(type, methods);
+
+
             //System.out.println(objmap);
         }
         catch(FileNotFoundException e){
@@ -48,16 +70,16 @@ public  class read {
 
         return datatypes;
     }
-    public HashMap<String,List<String>> getObj(){
-
+    public Map<String,List<String>> getobj(){
+      //  System.out.println(objmap);
         return objmap;
     }
 
-    public HashMap<String,List<String>> getmethod(){
-
+    public Map<String,List<String>> getmethod(){
+       // System.out.println(methodmap);
         return methodmap;
     }
-    public HashMap<String,String> getmethodreturn(){
+    public Map<String,String> getmethodreturn(){
 
         return methodreturn;
     }

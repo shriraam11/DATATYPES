@@ -7,25 +7,54 @@ import java.io.FileNotFoundException;
 }
 //ADD : '+';
 @parser :: members{
+    List<String> objects = new ArrayList<String>();
+    	List<String> methods = new ArrayList<String>();
+    	Map<String, List<String>> methodmap = new HashMap<>();
+    	Map<String, List<String>> objmap = new HashMap<>();
+    	String type ="";
+    	public void verify() {
+    		read r = new read();
+    		objmap = r.getobj();
+    		methodmap = r.getmethod();
 
-List<String > types= new ArrayList<String>(){
-    {   add("SourceContainer");
-       add("DestinationContainer");
-     }
-};
+
+    	}
+    		boolean isobj() {
+    			verify();
+    			for (Map.Entry<String,List<String>> m: objmap.entrySet()) {
+    				objects = m.getValue();
+    				//System.out.println(objects);
+    				if (objects.contains(getCurrentToken().getText())) {
+    					type = m.getKey();
+    					return true;
+    				}
+    			}
+    			return false;
+    		}
+
+    		boolean ismethod (){
+
+    			for (Map.Entry<String,List<String>> m: methodmap.entrySet()) {
+    				methods = m.getValue();
+    				//System.out.println(type);
+    				if (methods.contains(getCurrentToken().getText()) && type.equals(m.getKey())) {
+    					return true;
+    				}
+    			}
+
+    			return false;
+    		}
 
 
 
-List<String > methods= new ArrayList<String>(){{add("isEmpty");
-        add("CountofItems");}};
-        methods=r.
 
-boolean isobj(){
-    return types.contains(getCurrentToken().getText());
-}
-boolean ismethod(){
-  return methods.contains(getCurrentToken().getText());
-}
+
+//boolean isobj(){
+//    return types.contains(getCurrentToken().getText());
+//}
+//boolean ismethod(){
+//  return methods.contains(getCurrentToken().getText());
+//}
 
 }
 INT : [0-9]+ ;   //match Integers
@@ -42,15 +71,18 @@ String :  [a-zA-Z]+;
 EQ   : '==';
 LT   : '<';
 GT   :  '>';
-stat : stmt(NEWLINE | EOF);
-stmt : left=stmt comp=(AND | OR ) right=stmt
-        | left=stmt  op=(EQ | GT | LT ) right=stmt
-        | {isobj()}?String'.'{ismethod()}?String
-                | String
-                | INT
-                | BOOL
-                | FLOAT
-                | '(' stmt ')'
+stat : stmt(NEWLINE | EOF)
+        | stmt '=' stmt (NEWLINE | EOF)
+        ;
+
+stmt : left=stmt comp=(AND | OR ) right=stmt                     # opstmt
+        | left=stmt  op=(EQ | GT | LT ) right=stmt              # compstmt
+        | {isobj()}?String'.'{ismethod()}?String                 # isobjprop
+                | String                                          # stringend
+                | INT                                             #  intend
+                | BOOL                                             # boolend
+                | FLOAT                                            # floatend
+                | '(' stmt ')'                                      # parens
                 ;
 
 

@@ -20,9 +20,59 @@ public interface dataVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStat(dataParser.StatContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link dataParser#stmt}.
+	 * Visit a parse tree produced by the {@code floatend}
+	 * labeled alternative in {@link dataParser#stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStmt(dataParser.StmtContext ctx);
+	T visitFloatend(dataParser.FloatendContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code isobjprop}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIsobjprop(dataParser.IsobjpropContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code parens}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParens(dataParser.ParensContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code opstmt}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOpstmt(dataParser.OpstmtContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code boolend}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolend(dataParser.BoolendContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code stringend}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStringend(dataParser.StringendContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code intend}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntend(dataParser.IntendContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code compstmt}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCompstmt(dataParser.CompstmtContext ctx);
 }

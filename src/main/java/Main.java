@@ -13,10 +13,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         try{
 
-             read r = new read();
 
-            List<String> data;
-            data=r.getdata();
 
 
 

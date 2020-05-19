@@ -21,13 +21,99 @@ public interface dataListener extends ParseTreeListener {
 	 */
 	void exitStat(dataParser.StatContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link dataParser#stmt}.
+	 * Enter a parse tree produced by the {@code floatend}
+	 * labeled alternative in {@link dataParser#stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmt(dataParser.StmtContext ctx);
+	void enterFloatend(dataParser.FloatendContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link dataParser#stmt}.
+	 * Exit a parse tree produced by the {@code floatend}
+	 * labeled alternative in {@link dataParser#stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmt(dataParser.StmtContext ctx);
+	void exitFloatend(dataParser.FloatendContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code isobjprop}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterIsobjprop(dataParser.IsobjpropContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code isobjprop}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitIsobjprop(dataParser.IsobjpropContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code parens}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterParens(dataParser.ParensContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code parens}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitParens(dataParser.ParensContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code opstmt}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterOpstmt(dataParser.OpstmtContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code opstmt}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitOpstmt(dataParser.OpstmtContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code boolend}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolend(dataParser.BoolendContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code boolend}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolend(dataParser.BoolendContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code stringend}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterStringend(dataParser.StringendContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code stringend}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitStringend(dataParser.StringendContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code intend}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntend(dataParser.IntendContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code intend}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntend(dataParser.IntendContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code compstmt}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompstmt(dataParser.CompstmtContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code compstmt}
+	 * labeled alternative in {@link dataParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompstmt(dataParser.CompstmtContext ctx);
 }

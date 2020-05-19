@@ -1,8 +1,13 @@
 datatype : Container
 {
-obj : sourceContainer
+obj : SourceContainer
 obj : DestinationContainer
 method : IsEmpty boolean
 method : CountofItems int
 method : Barcode String
+}
+datatype : package
+{
+obj : src
+method : notpresent boolean
 }

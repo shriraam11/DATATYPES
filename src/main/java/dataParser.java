@@ -89,21 +89,53 @@ public class dataParser extends Parser {
 
 	@Override
 	public ATN getATN() { return _ATN; }
+	List<String> objects = new ArrayList<String>();
+	List<String> methods = new ArrayList<String>();
+	Map<String, List<String>> methodmap = new HashMap<>();
+	Map<String, List<String>> objmap = new HashMap<>();
+	String type ="";
+	public void verify() {
+		read r = new read();
+		objmap = r.getobj();
+		methodmap = r.getmethod();
 
 
-
-	List<String > types= new ArrayList<String>(){{add("SourceContainer");
-	       add("DestinationContainer");}};
-	List<String > methods= new ArrayList<String>(){{add("isEmpty");
-	        add("CountofItems");}};
-
-	boolean isobj(){
-	    return types.contains(getCurrentToken().getText());
 	}
-	boolean ismethod(){
-	  return methods.contains(getCurrentToken().getText());
-	}
+		boolean isobj() {
+			verify();
+			for (Map.Entry<String,List<String>> m: objmap.entrySet()) {
+				objects = m.getValue();
+				//System.out.println(objects);
+				if (objects.contains(getCurrentToken().getText())) {
+					type = m.getKey();
+					return true;
+				}
+			}
+			return false;
+		}
 
+		boolean ismethod (){
+
+			for (Map.Entry<String,List<String>> m: methodmap.entrySet()) {
+				methods = m.getValue();
+				//System.out.println(type);
+				if (methods.contains(getCurrentToken().getText()) && type.equals(m.getKey())) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+
+
+
+	//boolean isobj(){
+	//    return types.contains(getCurrentToken().getText());
+	//}
+	//boolean ismethod(){
+	//  return methods.contains(getCurrentToken().getText());
+	//}
 
 
 	public dataParser(TokenStream input) {
@@ -169,17 +201,76 @@ public class dataParser extends Parser {
 	}
 
 	public static class StmtContext extends ParserRuleContext {
-		public StmtContext left;
-		public Token comp;
-		public StmtContext right;
-		public Token op;
+		public StmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_stmt; }
+	 
+		public StmtContext() { }
+		public void copyFrom(StmtContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class FloatendContext extends StmtContext {
+		public TerminalNode FLOAT() { return getToken(dataParser.FLOAT, 0); }
+		public FloatendContext(StmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).enterFloatend(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).exitFloatend(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof dataVisitor ) return ((dataVisitor<? extends T>)visitor).visitFloatend(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IsobjpropContext extends StmtContext {
 		public List<TerminalNode> String() { return getTokens(dataParser.String); }
 		public TerminalNode String(int i) {
 			return getToken(dataParser.String, i);
 		}
-		public TerminalNode INT() { return getToken(dataParser.INT, 0); }
-		public TerminalNode BOOL() { return getToken(dataParser.BOOL, 0); }
-		public TerminalNode FLOAT() { return getToken(dataParser.FLOAT, 0); }
+		public IsobjpropContext(StmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).enterIsobjprop(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).exitIsobjprop(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof dataVisitor ) return ((dataVisitor<? extends T>)visitor).visitIsobjprop(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ParensContext extends StmtContext {
+		public StmtContext stmt() {
+			return getRuleContext(StmtContext.class,0);
+		}
+		public ParensContext(StmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).enterParens(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).exitParens(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof dataVisitor ) return ((dataVisitor<? extends T>)visitor).visitParens(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class OpstmtContext extends StmtContext {
+		public StmtContext left;
+		public Token comp;
+		public StmtContext right;
 		public List<StmtContext> stmt() {
 			return getRuleContexts(StmtContext.class);
 		}
@@ -188,24 +279,97 @@ public class dataParser extends Parser {
 		}
 		public TerminalNode AND() { return getToken(dataParser.AND, 0); }
 		public TerminalNode OR() { return getToken(dataParser.OR, 0); }
-		public TerminalNode EQ() { return getToken(dataParser.EQ, 0); }
-		public TerminalNode GT() { return getToken(dataParser.GT, 0); }
-		public TerminalNode LT() { return getToken(dataParser.LT, 0); }
-		public StmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_stmt; }
+		public OpstmtContext(StmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof dataListener ) ((dataListener)listener).enterStmt(this);
+			if ( listener instanceof dataListener ) ((dataListener)listener).enterOpstmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof dataListener ) ((dataListener)listener).exitStmt(this);
+			if ( listener instanceof dataListener ) ((dataListener)listener).exitOpstmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof dataVisitor ) return ((dataVisitor<? extends T>)visitor).visitStmt(this);
+			if ( visitor instanceof dataVisitor ) return ((dataVisitor<? extends T>)visitor).visitOpstmt(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BoolendContext extends StmtContext {
+		public TerminalNode BOOL() { return getToken(dataParser.BOOL, 0); }
+		public BoolendContext(StmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).enterBoolend(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).exitBoolend(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof dataVisitor ) return ((dataVisitor<? extends T>)visitor).visitBoolend(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class StringendContext extends StmtContext {
+		public TerminalNode String() { return getToken(dataParser.String, 0); }
+		public StringendContext(StmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).enterStringend(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).exitStringend(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof dataVisitor ) return ((dataVisitor<? extends T>)visitor).visitStringend(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IntendContext extends StmtContext {
+		public TerminalNode INT() { return getToken(dataParser.INT, 0); }
+		public IntendContext(StmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).enterIntend(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).exitIntend(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof dataVisitor ) return ((dataVisitor<? extends T>)visitor).visitIntend(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class CompstmtContext extends StmtContext {
+		public StmtContext left;
+		public Token op;
+		public StmtContext right;
+		public List<StmtContext> stmt() {
+			return getRuleContexts(StmtContext.class);
+		}
+		public StmtContext stmt(int i) {
+			return getRuleContext(StmtContext.class,i);
+		}
+		public TerminalNode EQ() { return getToken(dataParser.EQ, 0); }
+		public TerminalNode GT() { return getToken(dataParser.GT, 0); }
+		public TerminalNode LT() { return getToken(dataParser.LT, 0); }
+		public CompstmtContext(StmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).enterCompstmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof dataListener ) ((dataListener)listener).exitCompstmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof dataVisitor ) return ((dataVisitor<? extends T>)visitor).visitCompstmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -231,6 +395,10 @@ public class dataParser extends Parser {
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				{
+				_localctx = new IsobjpropContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+
 				setState(8);
 				if (!(isobj())) throw new FailedPredicateException(this, "isobj()");
 				setState(9);
@@ -245,30 +413,45 @@ public class dataParser extends Parser {
 				break;
 			case 2:
 				{
+				_localctx = new StringendContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(13);
 				match(String);
 				}
 				break;
 			case 3:
 				{
+				_localctx = new IntendContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(14);
 				match(INT);
 				}
 				break;
 			case 4:
 				{
+				_localctx = new BoolendContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(15);
 				match(BOOL);
 				}
 				break;
 			case 5:
 				{
+				_localctx = new FloatendContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(16);
 				match(FLOAT);
 				}
 				break;
 			case 6:
 				{
+				_localctx = new ParensContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(17);
 				match(T__1);
 				setState(18);
@@ -292,17 +475,16 @@ public class dataParser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 					case 1:
 						{
-						_localctx = new StmtContext(_parentctx, _parentState);
-						_localctx.left = _prevctx;
-						_localctx.left = _prevctx;
+						_localctx = new OpstmtContext(new StmtContext(_parentctx, _parentState));
+						((OpstmtContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_stmt);
 						setState(23);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
 						setState(24);
-						((StmtContext)_localctx).comp = _input.LT(1);
+						((OpstmtContext)_localctx).comp = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==AND || _la==OR) ) {
-							((StmtContext)_localctx).comp = (Token)_errHandler.recoverInline(this);
+							((OpstmtContext)_localctx).comp = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -310,22 +492,21 @@ public class dataParser extends Parser {
 							consume();
 						}
 						setState(25);
-						((StmtContext)_localctx).right = stmt(9);
+						((OpstmtContext)_localctx).right = stmt(9);
 						}
 						break;
 					case 2:
 						{
-						_localctx = new StmtContext(_parentctx, _parentState);
-						_localctx.left = _prevctx;
-						_localctx.left = _prevctx;
+						_localctx = new CompstmtContext(new StmtContext(_parentctx, _parentState));
+						((CompstmtContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_stmt);
 						setState(26);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(27);
-						((StmtContext)_localctx).op = _input.LT(1);
+						((CompstmtContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << LT) | (1L << GT))) != 0)) ) {
-							((StmtContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+							((CompstmtContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -333,7 +514,7 @@ public class dataParser extends Parser {
 							consume();
 						}
 						setState(28);
-						((StmtContext)_localctx).right = stmt(8);
+						((CompstmtContext)_localctx).right = stmt(8);
 						}
 						break;
 					}
