@@ -20,20 +20,6 @@ public interface dataVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStat(dataParser.StatContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code floatend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFloatend(dataParser.FloatendContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code isobjprop}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIsobjprop(dataParser.IsobjpropContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link dataParser#stmt}.
 	 * @param ctx the parse tree
@@ -48,31 +34,45 @@ public interface dataVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOpstmt(dataParser.OpstmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code boolend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBoolend(dataParser.BoolendContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code stringend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStringend(dataParser.StringendContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code intend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIntend(dataParser.IntendContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code compstmt}
 	 * labeled alternative in {@link dataParser#stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitCompstmt(dataParser.CompstmtContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code isobjprop}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIsobjprop(dataParser.IsobjpropContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code stringend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStringend(dataParser.StringendContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code intend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntend(dataParser.IntendContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code boolend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolend(dataParser.BoolendContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code floatend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFloatend(dataParser.FloatendContext ctx);
 }

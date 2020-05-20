@@ -27,20 +27,6 @@ public class dataBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements d
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFloatend(dataParser.FloatendContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitIsobjprop(dataParser.IsobjpropContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitParens(dataParser.ParensContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -55,7 +41,14 @@ public class dataBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements d
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBoolend(dataParser.BoolendContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCompstmt(dataParser.CompstmtContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitIsobjprop(dataParser.IsobjpropContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -76,5 +69,12 @@ public class dataBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements d
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCompstmt(dataParser.CompstmtContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBoolend(dataParser.BoolendContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFloatend(dataParser.FloatendContext ctx) { return visitChildren(ctx); }
 }

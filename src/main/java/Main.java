@@ -12,12 +12,6 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         try{
-
-
-
-
-
-//
             Scanner s = new Scanner(System.in);
             String input=s.nextLine();
             dataLexer lexer = new dataLexer(CharStreams.fromString(input));
@@ -31,9 +25,9 @@ public class Main {
     //        parser.setTokenFactory(factory);
             ParseTree tree = parser.stmt();
             System.out.println(tree.toStringTree(parser));
-//            ParseTreeWalker walker = new ParseTreeWalker();
-//            MyListener listener = new MyListener(parser);
-//            walker.walk(listener,tree);
+            ParseTreeWalker walker = new ParseTreeWalker();
+            MyListener listener = new MyListener(parser);
+            walker.walk(listener,tree);
 
         }
         catch(NullPointerException e){

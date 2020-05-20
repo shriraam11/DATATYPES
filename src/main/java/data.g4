@@ -45,18 +45,9 @@ import java.io.FileNotFoundException;
     			return false;
     		}
 
-
-
-
-
-//boolean isobj(){
-//    return types.contains(getCurrentToken().getText());
-//}
-//boolean ismethod(){
-//  return methods.contains(getCurrentToken().getText());
-//}
-
 }
+
+
 INT : [0-9]+ ;   //match Integers
 FLOAT : INT ('.' INT)?;// match float
 NEWLINE :'\r'? '\n' ;
@@ -76,13 +67,14 @@ stat : stmt(NEWLINE | EOF)
         ;
 
 stmt : left=stmt comp=(AND | OR ) right=stmt                     # opstmt
-        | left=stmt  op=(EQ | GT | LT ) right=stmt              # compstmt
-        | {isobj()}?String'.'{ismethod()}?String                 # isobjprop
+        | left=expr  op=(EQ | GT | LT ) right=expr              # compstmt
+        | '(' stmt ')'                                      # parens
+        ;
+expr :         {isobj()}?String'.'{ismethod()}?String                 # isobjprop
                 | String                                          # stringend
                 | INT                                             #  intend
                 | BOOL                                             # boolend
                 | FLOAT                                            # floatend
-                | '(' stmt ')'                                      # parens
                 ;
 
 

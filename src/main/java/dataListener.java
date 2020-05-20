@@ -21,30 +21,6 @@ public interface dataListener extends ParseTreeListener {
 	 */
 	void exitStat(dataParser.StatContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code floatend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterFloatend(dataParser.FloatendContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code floatend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitFloatend(dataParser.FloatendContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code isobjprop}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterIsobjprop(dataParser.IsobjpropContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code isobjprop}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitIsobjprop(dataParser.IsobjpropContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link dataParser#stmt}.
 	 * @param ctx the parse tree
@@ -69,42 +45,6 @@ public interface dataListener extends ParseTreeListener {
 	 */
 	void exitOpstmt(dataParser.OpstmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code boolend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoolend(dataParser.BoolendContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code boolend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoolend(dataParser.BoolendContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code stringend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterStringend(dataParser.StringendContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code stringend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitStringend(dataParser.StringendContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code intend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntend(dataParser.IntendContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code intend}
-	 * labeled alternative in {@link dataParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntend(dataParser.IntendContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code compstmt}
 	 * labeled alternative in {@link dataParser#stmt}.
 	 * @param ctx the parse tree
@@ -116,4 +56,64 @@ public interface dataListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCompstmt(dataParser.CompstmtContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code isobjprop}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIsobjprop(dataParser.IsobjpropContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code isobjprop}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIsobjprop(dataParser.IsobjpropContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code stringend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterStringend(dataParser.StringendContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code stringend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitStringend(dataParser.StringendContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code intend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntend(dataParser.IntendContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code intend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntend(dataParser.IntendContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code boolend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolend(dataParser.BoolendContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code boolend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolend(dataParser.BoolendContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code floatend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterFloatend(dataParser.FloatendContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code floatend}
+	 * labeled alternative in {@link dataParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitFloatend(dataParser.FloatendContext ctx);
 }
